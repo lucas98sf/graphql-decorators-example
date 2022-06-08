@@ -1,66 +1,71 @@
-import { Prop, Ref } from "@typegoose/typegoose";
+import { prop as Property, Ref } from "@typegoose/typegoose";
 import { TimeStamps } from "@typegoose/typegoose/lib/defaultClasses";
-import { IsEmail, IsHexColor, Length, MaxLength } from "class-validator";
+import { IsEmail, IsHexColor, MaxLength } from "class-validator";
 import { ObjectId } from "mongodb";
-import { Field, InputType, ObjectType } from "type-graphql";
+import {
+  Field as GqlField,
+  InputType as GqlInput,
+  ObjectType as GqlType,
+} from "type-graphql";
 import Title from "../title/title.schema";
 
-@ObjectType()
+@GqlType()
 export default class User extends TimeStamps {
-  @Field()
+  @GqlField()
   readonly _id: ObjectId;
 
-  @Prop({ required: true, unique: true })
-  @Field()
+  @Property({ required: true, unique: true })
+  @GqlField()
   email: string;
 
-  @Prop({ required: true })
+  @Property({ required: true })
   password: string;
 
-  @Prop({ required: true })
-  @Field()
+  @Property({ required: true })
+  @GqlField()
   username: string;
 
   @MaxLength(300)
-  @Field({ nullable: true })
+  @Property()
+  @GqlField({ nullable: true })
   biography?: string;
 
-  @Prop({ default: "#ffffff" })
-  @Field()
+  @Property({ default: "#ffffff" })
+  @GqlField()
   profileColor: string;
 
-  @Prop({ ref: () => Title })
-  @Field((type) => [Title])
+  @Property({ ref: () => Title })
+  @GqlField((type) => [Title])
   titles: Ref<Title>[];
 
-  @Field()
+  @GqlField()
   createdAt: Date;
 
-  @Field()
+  @GqlField()
   updatedAt: Date;
 }
 
-@InputType()
+@GqlInput()
 export class CreateUserInput implements Partial<User> {
   @IsEmail()
-  @Field()
+  @GqlField()
   email: string;
 
-  @Length(8, 30)
-  @Field()
+  // @Length(8, 30)
+  @GqlField()
   password: string;
 
-  @Length(2, 20)
-  @Field()
+  // @Length(2, 20)
+  @GqlField()
   username: string;
 }
 
-@InputType()
+@GqlInput()
 export class UpdateUserInput extends CreateUserInput {
-  @Field({ nullable: true })
+  @GqlField({ nullable: true })
   biography?: string;
 
   @IsHexColor()
-  @Field({ nullable: true })
+  @GqlField({ nullable: true })
   profileColor?: string;
 }

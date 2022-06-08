@@ -4,7 +4,8 @@
     "baseUrl": ".",
     "rootDir": ".",
     "outDir": "./dist",
-    "strictPropertyInitialization": false
+    "strictPropertyInitialization": false,
+    "skipLibCheck": true
   },
   "include": ["src/**/*", "./package.json"],
   "exclude": ["node_modules", "dist"]
