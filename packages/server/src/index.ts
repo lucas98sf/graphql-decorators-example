@@ -1,11 +1,12 @@
-import { createServer } from "@graphql-yoga/node";
-import { ObjectId } from "mongodb";
-import path from "path";
 import "reflect-metadata";
+import path from "path";
+import { config } from "./configs";
+import { ApolloServer } from "apollo-server";
 import { buildSchema } from "type-graphql";
-import { config } from "./config";
+import { Container as container } from "typedi";
 import { connectToDatabase } from "./db";
-import { ObjectIdScalar } from "./scalars/object-id.scalar";
+import { ObjectIdScalarMap } from "./scalars/object-id.scalar";
+import maskErrorMessages from "./utils/maskErrorMessages";
 
 async function bootstrap() {
   if (!config.MONGO_URI)
@@ -16,18 +17,19 @@ async function bootstrap() {
   const schema = await buildSchema({
     resolvers: [__dirname + "/modules/**/*.resolver.ts"],
     emitSchemaFile: path.resolve(__dirname, "schema.gql"),
-    scalarsMap: [{ type: ObjectId, scalar: ObjectIdScalar }],
+    scalarsMap: [ObjectIdScalarMap],
+    container,
     // globalMiddlewares: [TypegooseMiddleware],
   });
 
-  const server = createServer({
+  const server = new ApolloServer({
     schema,
-    port: config.PORT,
-    maskedErrors: false,
-    logging: true,
+    csrfPrevention: true,
+    formatError: err => maskErrorMessages(err),
   });
 
-  await server.start();
+  const { url } = await server.listen(config.PORT);
+  console.log(`Server is running, GraphQL Playground available at ${url}`);
 }
 
-bootstrap().catch((err) => console.error(err));
+bootstrap().catch(err => console.error(err));

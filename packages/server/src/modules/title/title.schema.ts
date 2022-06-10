@@ -1,29 +1,37 @@
-import { Prop, Ref } from "@typegoose/typegoose";
-import { TimeStamps } from "@typegoose/typegoose/lib/defaultClasses";
-import { Field, ObjectType } from "type-graphql";
+import { mongoose, Prop as Property, Ref } from "@typegoose/typegoose";
+import {
+  Field as GqlField,
+  // InputType as GqlInput,
+  ObjectType as GqlType,
+} from "type-graphql";
 import User from "../user/user.schema";
 
-export enum TitleTypesEnum {
-  "movie",
-  "serie",
-  "anime",
-}
+export type TitleTypes = "movie" | "serie" | "anime";
 
-@ObjectType()
-export default class Title extends TimeStamps {
-  @Field()
-  @Prop({ required: true })
-  name: string;
+@GqlType()
+export default class Title {
+  @GqlField()
+  readonly _id!: mongoose.Types.ObjectId;
 
-  @Field()
-  @Prop({ required: true })
-  sinopse: string;
+  @GqlField()
+  @Property({ required: true, unique: true })
+  name!: string;
 
-  @Field()
-  @Prop({ required: true })
-  type: TitleTypesEnum;
+  @GqlField()
+  @Property({ required: true })
+  synopsis!: string;
 
-  @Field((type) => [User], { defaultValue: [] })
-  @Prop({ ref: () => User })
-  users: Ref<User>[];
+  @GqlField()
+  @Property({ required: true })
+  type!: TitleTypes;
+
+  @GqlField(type => [User])
+  @Property({ ref: () => User })
+  users!: Ref<User>[];
+
+  @GqlField()
+  createdAt!: Date;
+
+  @GqlField()
+  updatedAt!: Date;
 }

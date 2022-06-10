@@ -26,10 +26,13 @@ type Query {
 }
 
 type Title {
+  _id: ObjectId!
+  createdAt: DateTime!
   name: String!
-  sinopse: String!
-  type: Float!
-  users: [User!]
+  synopsis: String!
+  type: String!
+  updatedAt: DateTime!
+  users: [User!]!
 }
 
 input UpdateUserInput {

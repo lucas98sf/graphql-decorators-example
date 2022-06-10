@@ -26,12 +26,12 @@ module.exports = {
   plugins: ["@typescript-eslint", "import", "prettier", "type-graphql"],
   rules: {
     "comma-dangle": ["error", "always-multiline"],
-    // "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": [
       "error",
-      { ignoreRestSiblings: true },
+      { ignoreRestSiblings: true, argsIgnorePattern: "^(type|of|returns)" },
     ],
-    // "type-graphql/invalid-decorated-type": "off",
+    "no-unused-vars": "off",
+    "type-graphql/invalid-decorated-type": "off",
   },
   settings: {
     "import/resolver": {

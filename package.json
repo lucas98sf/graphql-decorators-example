@@ -22,6 +22,7 @@
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.30.0",
+    "eslint-plugin-type-graphql": "^1.0.0",
     "husky": ">=6",
     "jest": "^28.1.0",
     "lint-staged": ">=10",
@@ -46,8 +47,5 @@
     "dev": "concurrently \"yarn dev:server\" \"yarn dev:web\"",
     "dev:server": "yarn workspace @fullstack-app/server dev",
     "dev:web": "yarn workspace @fullstack-app/web dev"
-  },
-  "dependencies": {
-    "eslint-plugin-type-graphql": "^1.0.0"
   }
 }

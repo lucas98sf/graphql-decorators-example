@@ -1,0 +1,5 @@
+- [ ] tests
+- [ ] extend partial (interfaces? nestjs?...)
+- [x] class validator errors (apollo? graphql-yoga?)
+- [ ] error validation rafactoring
+- [ ] query pagination, sorting, filtering

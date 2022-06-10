@@ -6,6 +6,7 @@
     "declarationMap": true,
     "esModuleInterop": true,
     "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "forceConsistentCasingInFileNames": true,
     "incremental": true,
     "noImplicitAny": true,
@@ -14,8 +15,7 @@
     "noUnusedLocals": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "strict": true,
-    "emitDecoratorMetadata": true
+    "strict": true
   },
   "exclude": ["node_modules", "dist", "*.d.ts"]
 }

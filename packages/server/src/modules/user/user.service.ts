@@ -1,11 +1,18 @@
-import { DocumentType } from "@typegoose/typegoose";
+import { Service } from "typedi";
 import { UserModel } from "../../models";
-import User, { CreateUserInput } from "./user.schema";
+import { CreateUserInput } from "./user.schema";
 
-export const createUser = async (
-  data: CreateUserInput,
-): Promise<DocumentType<User>> => {
-  const user = await UserModel.create(data);
+@Service()
+export default class UserService {
+  async getAll() {
+    const users = await UserModel.find({});
 
-  return user;
-};
+    return users;
+  }
+
+  async createOne(data: CreateUserInput) {
+    const user = await UserModel.create(data);
+
+    return user;
+  }
+}
