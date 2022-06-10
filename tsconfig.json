@@ -2,17 +2,20 @@
   "compilerOptions": {
     "target": "es2016",
     "module": "commonjs",
-    "strict": true,
+    "composite": true,
+    "declarationMap": true,
     "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "forceConsistentCasingInFileNames": true,
+    "incremental": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noUncheckedIndexedAccess": true,
+    "noUnusedLocals": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "noImplicitReturns": true,
-    "noUnusedLocals": true,
-    "forceConsistentCasingInFileNames": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "allowSyntheticDefaultImports": true,
-    "sourceMap": true
+    "strict": true,
+    "emitDecoratorMetadata": true
   },
   "exclude": ["node_modules", "dist", "*.d.ts"]
 }

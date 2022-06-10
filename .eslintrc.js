@@ -5,23 +5,39 @@ module.exports = {
     node: true,
   },
   extends: [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended-requiring-type-checking",
-    "plugin:type-graphql/recommended",
     "prettier",
+    "eslint:recommended",
+    "plugin:import/recommended",
+    "plugin:type-graphql/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
   ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaFeatures: {
+      module: true,
       jsx: true,
     },
-    project: ["./tsconfig.json"],
+    project: ["./tsconfig.json", "./packages/*/tsconfig.json"],
     ecmaVersion: "latest",
     sourceType: "module",
   },
-  plugins: ["@typescript-eslint", "prettier", "type-graphql"],
+  plugins: ["@typescript-eslint", "import", "prettier", "type-graphql"],
   rules: {
-    "no-unused-vars": "off",
-    "type-graphql/invalid-decorated-type": "off",
+    "comma-dangle": ["error", "always-multiline"],
+    // "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      { ignoreRestSiblings: true },
+    ],
+    // "type-graphql/invalid-decorated-type": "off",
+  },
+  settings: {
+    "import/resolver": {
+      typescript: {
+        project: ["./tsconfig.json", "packages/*/tsconfig.json"],
+      },
+    },
   },
 };

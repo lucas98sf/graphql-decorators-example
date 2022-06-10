@@ -3,9 +3,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "rootDir": ".",
-    "outDir": "./dist",
-    "strictPropertyInitialization": false,
-    "skipLibCheck": true
+    "outDir": "./dist"
   },
   "include": ["src/**/*", "./package.json"],
   "exclude": ["node_modules", "dist"]
