@@ -19,7 +19,6 @@ async function bootstrap() {
     emitSchemaFile: path.resolve(__dirname, "schema.gql"),
     scalarsMap: [ObjectIdScalarMap],
     container,
-    // globalMiddlewares: [TypegooseMiddleware],
   });
 
   const server = new ApolloServer({
