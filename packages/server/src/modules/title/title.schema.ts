@@ -1,9 +1,5 @@
 import { mongoose, Prop as Property, Ref } from "@typegoose/typegoose";
-import {
-  Field as GqlField,
-  // InputType as GqlInput,
-  ObjectType as GqlType,
-} from "type-graphql";
+import { Field as GqlField, ObjectType as GqlType } from "type-graphql";
 import User from "../user/user.schema";
 
 export type TitleTypes = "movie" | "serie" | "anime";
